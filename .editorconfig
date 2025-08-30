@@ -188,6 +188,7 @@ csharp_preserve_single_line_statements = true
 ###############################
 # Ignore Migrations folder    #
 ###############################
+
 [/src/Sinapsis.Marketplace.Infrastructure/Migrations/*]
 # Default severity for analyzer diagnostics with category 'Style'
 dotnet_analyzer_diagnostic.category-Style.severity = none
@@ -420,3 +421,6 @@ dotnet_diagnostic.CS9107.severity = none
 
 # CA1515: Consider making public types internal
 dotnet_diagnostic.CA1515.severity = none
+
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
