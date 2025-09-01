@@ -189,11 +189,12 @@ csharp_preserve_single_line_statements = true
 # Ignore Migrations folder    #
 ###############################
 
-[/src/Sinapsis.Marketplace.Infrastructure/Migrations/*]
+
+[/src/Meetopia.Infrastructure/Migrations/*]
 # Default severity for analyzer diagnostics with category 'Style'
-dotnet_analyzer_diagnostic.category-Style.severity = none
+dotnet_analyzer_diagnostic.category-Style.severity = suggestion
 # CA1062: Validate arguments of public methods
-dotnet_diagnostic.CA1062.severity = none
+dotnet_diagnostic.CA1062.severity = suggestion
 
 #### Naming styles ####
 [*.{cs,vb}]
