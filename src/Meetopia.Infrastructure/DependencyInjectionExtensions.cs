@@ -1,3 +1,4 @@
+using Meetopia.Application.Common.Interfaces;
 using Meetopia.Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ public static class DependencyInjectionExtensions
 
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+        builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 
         return builder;
     }

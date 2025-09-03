@@ -1,3 +1,4 @@
+using Meetopia.Application.Common.Interfaces;
 using Meetopia.Domain.Activities.Entities;
 using Meetopia.Infrastructure.Data.Seed;
 
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Meetopia.Infrastructure.Data;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options)
-    : DbContext(options)
+    : DbContext(options), IApplicationDbContext
 {
     public DbSet<Activity> Activities { get; set; }
 
