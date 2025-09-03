@@ -1,3 +1,4 @@
+using Meetopia.Api;
 using Meetopia.Infrastructure;
 using Meetopia.Infrastructure.Data;
 
@@ -11,11 +12,15 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddCors();
+
 builder.AddInfrastructureServices();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseApplicationCors();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
