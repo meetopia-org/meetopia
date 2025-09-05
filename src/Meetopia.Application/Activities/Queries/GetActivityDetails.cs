@@ -1,5 +1,3 @@
-using MediatR;
-
 using Meetopia.Application.Common.Interfaces;
 using Meetopia.Domain.Activities.Entities;
 
