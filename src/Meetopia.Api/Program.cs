@@ -1,4 +1,5 @@
 using Meetopia.Api;
+using Meetopia.Application;
 using Meetopia.Infrastructure;
 using Meetopia.Infrastructure.Data;
 
@@ -14,7 +15,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddCors();
 
-builder.AddInfrastructureServices();
+builder
+    .AddApplicationServices()
+    .AddInfrastructureServices();
 
 var app = builder.Build();
 
