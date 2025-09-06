@@ -13,7 +13,7 @@ public class CreateActivityTests
     public async Task Handle_GivenValidActivity_CreatesActivity()
     {
         // Arrange
-        using var dbContext = CreateDbContext();
+        using var dbContext = UnitTestDbContext.Create();
 
         var activity = new Activity()
         {
@@ -35,14 +35,5 @@ public class CreateActivityTests
         id.ShouldBe(activity.Id);
         var createdEntity = await dbContext.Activities.FirstOrDefaultAsync(a => a.Id == activity.Id);
         createdEntity.ShouldNotBeNull();
-    }
-
-    private static AppDbContext CreateDbContext()
-    {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-            .Options;
-
-        return new AppDbContext(options);
     }
 }

@@ -9,11 +9,14 @@ namespace Meetopia.Api.Tests.Endpoints;
 
 public class ActivityEnpointsTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
+    private const string Route = "api/activities";
+    private readonly Uri _baseUri = new(Route, UriKind.Relative);
+
     [Fact]
     public async Task Get_ShouldReturnOk()
     {
         // Act
-        var response = await HttpClient.GetAsync(new Uri("api/activities", UriKind.Relative));
+        var response = await HttpClient.GetAsync(_baseUri);
 
         // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
@@ -23,6 +26,35 @@ public class ActivityEnpointsTests(IntegrationTestWebApplicationFactory factory)
     public async Task Post_ShouldReturnOk()
     {
         // Arrange
+        var activity = CreateActivity();
+
+        // Act
+        var response = await HttpClient.PostAsJsonAsync(new Uri("api/activities", UriKind.Relative), activity);
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public async Task Put_ShouldReturnNoContent()
+    {
+        // Arrange
+        var id = Guid.NewGuid().ToString();
+        var activity = CreateActivity(id);
+        DbContext.Activities.Add(activity);
+        await DbContext.SaveChangesAsync();
+
+        var activityEdited = CreateActivity(id);
+        activityEdited.Title = "New Title";
+
+        var response = await HttpClient.PutAsJsonAsync(_baseUri, activityEdited);
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+    }
+
+    private static Activity CreateActivity(string? id = null)
+    {
         var activity = new Activity
         {
             Title = "Test activity",
@@ -35,10 +67,11 @@ public class ActivityEnpointsTests(IntegrationTestWebApplicationFactory factory)
             Longitude = 0
         };
 
-        // Act
-        var response = await HttpClient.PostAsJsonAsync(new Uri("api/activities", UriKind.Relative), activity);
+        if (id is not null)
+        {
+            activity.Id = id;
+        }
 
-        // Assert
-        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        return activity;
     }
 }

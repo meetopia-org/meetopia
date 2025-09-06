@@ -29,4 +29,11 @@ public class ActivitiesController
         var id = await Mediator.Send(new CreateActivityCommand() { Activity = activity });
         return Ok(id);
     }
+
+    [HttpPut]
+    public async Task<ActionResult> EditActivity(Activity activity)
+    {
+        await Mediator.Send(new EditActivityCommand { Activity = activity });
+        return NoContent();
+    }
 }
