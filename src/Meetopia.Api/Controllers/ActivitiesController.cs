@@ -36,4 +36,11 @@ public class ActivitiesController
         await Mediator.Send(new EditActivityCommand { Activity = activity });
         return NoContent();
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteActivity(string id)
+    {
+        await Mediator.Send(new DeleteActivityCommand { Id = id });
+        return Ok();
+    }
 }

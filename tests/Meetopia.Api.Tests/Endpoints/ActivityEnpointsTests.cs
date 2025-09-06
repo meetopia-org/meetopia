@@ -53,6 +53,21 @@ public class ActivityEnpointsTests(IntegrationTestWebApplicationFactory factory)
         response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
     }
 
+    [Fact]
+    public async Task Delete_ShouldReturnOk()
+    {
+        // Arrange
+        var id = Guid.NewGuid().ToString();
+        var activity = CreateActivity(id);
+        DbContext.Activities.Add(activity);
+        await DbContext.SaveChangesAsync();
+
+        var response = await HttpClient.DeleteAsync(new Uri($"{Route}/{id}", UriKind.Relative));
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+    }
+
     private static Activity CreateActivity(string? id = null)
     {
         var activity = new Activity
