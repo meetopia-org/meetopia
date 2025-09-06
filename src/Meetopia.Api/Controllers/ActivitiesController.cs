@@ -1,3 +1,4 @@
+using Meetopia.Application.Activities.Commands;
 using Meetopia.Application.Activities.Queries;
 using Meetopia.Domain.Activities.Entities;
 
@@ -20,5 +21,12 @@ public class ActivitiesController
     {
         var activity = await Mediator.Send(new GetActivityDetailsQuery { Id = id }, cancellationToken);
         return Ok(activity);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<string>> CreateActivity(Activity activity)
+    {
+        var id = await Mediator.Send(new CreateActivityCommand() { Activity = activity });
+        return Ok(id);
     }
 }

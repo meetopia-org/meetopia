@@ -42,3 +42,5 @@ var context = services.GetRequiredService<AppDbContext>();
 await context.Database.MigrateAsync();
 
 await app.RunAsync();
+
+public partial class Program { protected Program() { } }

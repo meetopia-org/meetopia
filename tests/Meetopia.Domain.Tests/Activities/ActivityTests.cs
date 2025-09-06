@@ -18,6 +18,6 @@ public class ActivityTests
 
         var id = activity.Id;
 
-        id.Should().NotBeNullOrEmpty();
+        id.ShouldNotBeNullOrEmpty();
     }
 }

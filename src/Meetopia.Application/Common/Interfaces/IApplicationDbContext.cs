@@ -1,7 +1,5 @@
 using Meetopia.Domain.Activities.Entities;
 
-using Microsoft.EntityFrameworkCore;
-
 namespace Meetopia.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
